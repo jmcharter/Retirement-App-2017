@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Divide</title>
+    </head>
+
+    <body>
+        {% block form %}
+        <div class="container">
+        
+        <form role="form" method="post" action="{{ url_for('division') }}">
+            {{ form.hidden_tag() }}
+
+            <div class="col-sm-1">{{ form.number.label }} </div><div class="col-sm-2"> {{ form.number() }}</div>
+            
+            <div class="col-sm-1">{{ form.divide_by.label }} </div><div class="col-sm-2"> {{ form.divide_by() }}</div>
+            
+            
+
+           <div class="col-sm-1"> <button type="submit" class="btn btn-primary btn-xs">Do the math</button></div>
+           <div class="row"></div>
+
+           {% if form.number.errors %}
+                <div><div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                        Error: {{ ', '.join(form.number.errors) }}
+                </div></div>
+            {% endif %}
+
+
+            {% if form.divide_by.errors %}
+               <div><div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                        Error: {{ ', '.join(form.divide_by.errors) }}
+                </div></div>
+
+            {% endif %}
+        </form>
+
+        <div class="row col-sm-12 bg-success">
+        {% if result %}        
+            <h4>Result is: {{ result }}</h4>
+        {% endif %}
+        </div>
+        </div>
+
+        
+        
+        {% endblock %}
+    </body>
+</html>
+
+
+
